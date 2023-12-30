@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-size: cover;
+    background: linear-gradient(to right, #202020, #000, #000, #202020);
+}
+
+#container {
+    width: 600px;
+    height: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    background: linear-gradient(to right, #202020, #000, #000, #202020);
+}
+
+/* Add or update this in your CSS */
+#refreshBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    float: right; /* Align to the right */
+}
+
+.refresh-btn img {
+    width: 30px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+}
+
+
+.refresh-btn {
+    width: 20px;
+    height: 20px;
+    text-align: rights;
+}
+
+.extension-title {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+}
+
+button {
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    margin: 0 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: black;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.match-name {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.match-details {
+    margin-top: 10px;
+}
+
+/* Updated team details styles */
+.team-details {
+    display: flex;
+    justify-content: space-between; /* Changed from baseline to space-between */
+    align-items: center; /* Added align-items property */
+}
+
+.team-img {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+    margin-right: 5px; /* Added margin to create space between image and text */
+}
+
+.team-name {
+    color: #1e90ff; /* Dodger Blue */
+    margin-right: 5px;
+    font-size: 1.4em;
+}
+
+.team-stats {
+    color: white;
+    text-align: right; /* Changed from left to right */
+    font-size: 1.3em;
+}
+.match-status {
+    text-align: center;
+    color: white;
+}
+
+#matchesBtn,
+#newsBtn {
+    display: inline-block;
+    margin: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: transparent;
+    border: 2px solid #fff; /* White border for buttons */
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#matchesBtn:hover,
+#newsBtn:hover {
+    background-color: #fff; /* White background on hover */
+    color: #000; /* Black text on hover */
+}
