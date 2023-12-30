@@ -37,9 +37,9 @@ Customization
 API Keys
 Replace the placeholder API keys in script.js with your own keys.
 
-Cricket API Key: Get it here
+Cricket API Key: https://cricketdata.org/
 
-News API Key: Get it here
+News API Key: https://newsapi.org/
 
 Styles and Icons
 You can customize the extension's appearance by modifying styles in style.css. Replace icons in the img folder to give it a personalized touch.
