@@ -5,7 +5,7 @@ async function getMatchData() {
 
         if (data.status !== "success") return;
 
-        const matchesList = data.data;
+        const matchesList = data.data.filter(match => match.series_id === "76ae85e2-88e5-4e99-83e4-5f352108aebc");
 
         if (!matchesList) return [];
 
