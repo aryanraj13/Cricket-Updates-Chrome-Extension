@@ -4,13 +4,15 @@
 
 The Cricket Chrome Extension provides live updates on cricket matches and top news headlines. It's a simple and user-friendly extension that keeps you informed about the latest cricket scores and important news.
 
-![alt text](https://github.com/aryanraj13/Cricket-Updates-Chrome-Extension/blob/main/img.png?raw=true)
-
 ## Features
 
 - **Live Cricket Updates:** Get real-time information about ongoing cricket matches, including scores, wickets, and overs.
 
+![alt text](https://github.com/aryanraj13/Cricket-Updates-Chrome-Extension/blob/main/score.png?raw=true)
+
 - **Top News Headlines:** Stay updated with the latest top news headlines from TechCrunch.
+
+![alt text](https://github.com/aryanraj13/Cricket-Updates-Chrome-Extension/blob/main/new.png?raw=true)
 
 ## Installation
 

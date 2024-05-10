@@ -1,69 +1,39 @@
 async function getMatchData() {
     try {
-        const response = await fetch("https://api.cricapi.com/v1/currentMatches?apikey=eb21d9c2-74d8-4a2f-864d-1764b26a37f1&offset=0");
+        const response = await fetch("https://api.cricapi.com/v1/cricScore?apikey=a80b2e33-6764-4af7-8797-3a8dcc0e88ac");
         const data = await response.json();
 
         if (data.status !== "success") return;
 
         const matchesList = data.data;
 
+        // Clear existing match data
+        document.getElementById("news").innerHTML = '';
+
         if (!matchesList) return [];
 
-        const relevantData = matchesList.map(match => {
-            const { name, status, score, teams, teamInfo } = match;
-            const team1 = teams[0];
-            const team2 = teams[1];
+        // Filter out only the live matches
+        const liveMatches = matchesList.filter(match => match.ms === "result" && match.series === "Indian Premier League 2024");
 
-            // Check if teamInfo array exists and has at least one element
-            if (Array.isArray(teamInfo) && teamInfo.length > 0) {
-                const team1img = teamInfo.find(i => i.name === `${team1}`) || {};
-                const team2img = teamInfo.find(i => i.name === `${team2}`) || {};
+        const relevantData = liveMatches.map(match => {
+            const { id, dateTimeGMT, t1, t2, t1s, t2s, t1img, t2img, series, status } = match;
 
-                // Check if score array exists and has at least one element
-                if (Array.isArray(score) && score.length > 0) {
-                    const { r: r1, w: w1, o: o1 } = score.find(s => s.inning === `${team1} Inning 1`) || {};
-                    const { r: r2, w: w2, o: o2 } = score.find(s => s.inning === `${team2} Inning 1`) || {};
-
-                    return `<div class="match-name">${name}</div>
-                        <div class="match-details">
-                            <div class="team-details">
-                                <span class="team-name">
-                                    <img class="team-img" src="${team1img.img}" />
-                                    ${team1} [${team1img.shortname}]</span>
-                                <span class="team-stats">${r1}/${w1} (${o1})</span>
-                            </div>
-                            <div class="team-details">
-                                <span class="team-name">
-                                    <img class="team-img" src="${team2img.img}" />
-                                    ${team2}  [${team2img.shortname}]</span>
-                                <span class="team-stats">${r2}/${w2} (${o2})</span>
-                            </div>
-                            <div class="match-status">${status}</div>
-                        </div>`;
-                } else {
-                    // Handle the case when the score array is empty or missing
-                    return `<div class="match-name">${name}</div>
-                        <div class="match-details">
-                            <div class="team-details">
-                                <span class="team-name">
-                                    <img class="team-img" src="${team1img.img}" />
-                                    ${team1} [${team1img.shortname}]</span>
-                                <span class="team-stats">N/A</span>
-                            </div>
-                            <div class="team-details">
-                                <span class="team-name">
-                                    <img class="team-img" src="${team2img.img}" />
-                                    ${team2}  [${team2img.shortname}]</span>
-                                <span class="team-stats">N/A</span>
-                            </div>
-                            <div class="match-status">${status}</div>
-                        </div>`;
-                }
-            } else {
-                // Handle the case when teamInfo array is empty or missing
-                // You can provide default values or skip processing altogether
-                return '';
-            }
+            return `<div class="match-name">${series}</div>
+                <div class="match-details">
+                    <div class="team-details">
+                        <span class="team-name">
+                            <img class="team-img" src="${t1img}" />
+                            ${t1}</span>
+                        <span class="team-stats">${t1s || "N/A"}</span>
+                    </div>
+                    <div class="team-details">
+                        <span class="team-name">
+                            <img class="team-img" src="${t2img}" />
+                            ${t2}</span>
+                        <span class="team-stats">${t2s || "N/A"}</span>
+                    </div>
+                    <div class="match-status">${status}</div>
+                </div>`;
         });
 
         const matchesElement = document.getElementById("matches");
@@ -75,6 +45,41 @@ async function getMatchData() {
     }
 }
 
+async function getNewsData() {
+    try {
+        const response = await fetch("https://api.webz.io/newsApiLite?token=69529245-f932-4221-a082-9394ed9eebdc&q=Bitcoin");
+        const data = await response.json();
+
+        if (data.posts && data.posts.length > 0) {
+            const posts = data.posts.map(post => ({
+                title: post.thread.title,
+                url: post.thread.url,
+                site: post.thread.site,
+                date: post.thread.published
+            }));
+
+            const newsElement = document.getElementById("news");
+
+            // Clear existing match data
+            document.getElementById("matches").innerHTML = '';
+
+            // Display news data
+            newsElement.innerHTML = posts.map(post => `
+                <li>
+                    <span class="team-stats" style="color: white;">${post.title}</span><br>
+                    <a style="color: green;" href="${post.url}" target="_blank">${post.site}</a>
+                    <span style="color: white; display: block; text-align: right;">${new Date(post.date).toLocaleDateString('en-US', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                </li>
+            `).join('');
+        } else {
+            console.log("No posts found.");
+        }
+    } catch (error) {
+        console.error("Error fetching news data:", error);
+    }
+}
+
+document.getElementById("newsBtn").addEventListener("click", getNewsData);
 document.getElementById("matchesBtn").addEventListener("click", getMatchData);
 document.getElementById("refreshBtn").addEventListener("click", getMatchData);
 
