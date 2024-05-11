@@ -13,7 +13,13 @@ async function getMatchData() {
         if (!matchesList) return [];
 
         // Filter out only the live matches
-        const liveMatches = matchesList.filter(match => match.ms === "result" && match.series === "Indian Premier League 2024");
+        const liveMatches = matchesList.filter(match => match.ms === "live" && match.series === "Indian Premier League 2024");
+
+        if (liveMatches.length === 0) {
+            const matchesElement = document.getElementById("matches");
+            matchesElement.innerHTML = '<div class="team-stats" style="display: flex;font-size:1.6em; justify-content: center; align-items: flex-start; height: 100vh; padding-top: 20vh;">No live ipl matches</div>';
+            return; // Optionally return if needed, or continue execution
+        }
 
         const relevantData = liveMatches.map(match => {
             const { id, dateTimeGMT, t1, t2, t1s, t2s, t1img, t2img, series, status } = match;
